@@ -4,23 +4,32 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gamebox.R;
 
 public class DemosFragment extends Fragment {
 
-    private DemosViewModel demosViewModel;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        demosViewModel = new ViewModelProvider(this).get(DemosViewModel.class);
         View root = inflater.inflate(R.layout.fragment_demos, container, false);
-        final TextView textView = root.findViewById(R.id.text_demos);
-        demosViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        recyclerView = root.findViewById(R.id.demos_recycler_view);
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this.getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        mAdapter = new DemosAdapter(this.getContext(), new String[]{"a", "b", "c"});
+        recyclerView.setAdapter(mAdapter);
+
         return root;
     }
 }
