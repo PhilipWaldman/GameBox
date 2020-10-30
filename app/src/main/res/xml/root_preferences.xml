@@ -1,0 +1,14 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+        app:key="dark_mode"
+        app:title="@string/dark_mode" />
+
+    <ListPreference
+        android:defaultValue="english_us"
+        android:entries="@array/language_entries"
+        android:entryValues="@array/language_values"
+        android:key="language"
+        android:title="@string/language" />
+</PreferenceScreen>
