@@ -5,25 +5,35 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.gamebox.MainActivity.OnItemClickListener;
 import com.gamebox.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class GamesFragment extends Fragment {
+public class GamesFragment extends Fragment implements OnItemClickListener {
 
-    private GamesViewModel gamesViewModel;
+    private static final String[] GAME_NAMES = new String[]{
+            "Game 1",
+            "Game 2",
+            "Game 3"
+    };
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        gamesViewModel = new ViewModelProvider(this).get(GamesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_games, container, false);
 
-        final TextView textView = root.findViewById(R.id.text_games);
-        gamesViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        // Recycler View
+        RecyclerView recyclerView = root.findViewById(R.id.games_recycler_view);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        GamesAdapter gamesAdapter = new GamesAdapter(this.getContext(), GAME_NAMES, this);
+        recyclerView.setAdapter(gamesAdapter);
 
         // Rick roll fab
         MediaPlayer rickRoll = MediaPlayer.create(this.getContext(), R.raw.rick_roll);
@@ -31,5 +41,19 @@ public class GamesFragment extends Fragment {
         fab.setOnClickListener(view -> rickRoll.start());
 
         return root;
+    }
+
+    @Override
+    public void onItemClicked(String gameName) {
+        if (GAME_NAMES[0].equals(gameName)) {
+            Toast.makeText(this.getContext(), gameName, Toast.LENGTH_LONG).show();
+            // Open game 1
+        } else if (GAME_NAMES[1].equals(gameName)) {
+            Toast.makeText(this.getContext(), gameName, Toast.LENGTH_LONG).show();
+            // Open game 2
+        } else if (GAME_NAMES[2].equals(gameName)) {
+            Toast.makeText(this.getContext(), gameName, Toast.LENGTH_LONG).show();
+            // Open game 3
+        }
     }
 }

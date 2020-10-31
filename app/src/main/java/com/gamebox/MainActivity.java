@@ -47,4 +47,8 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    public interface OnItemClickListener {
+        void onItemClicked(String itemName);
+    }
 }

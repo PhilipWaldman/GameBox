@@ -9,29 +9,32 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gamebox.MainActivity.OnItemClickListener;
 import com.gamebox.R;
 
 import org.jetbrains.annotations.NotNull;
 
 public class DemosAdapter extends RecyclerView.Adapter<DemosAdapter.DemosViewHolder> {
-    private String[] demos;
     private final LayoutInflater inflater;
+    private final String[] demos;
+    OnItemClickListener onClickListener;
 
-    public DemosAdapter(Context context, String[] demos) {
+    public DemosAdapter(Context context, String[] demos, OnItemClickListener onClickListener) {
         inflater = LayoutInflater.from(context);
+        this.onClickListener = onClickListener;
         this.demos = demos;
     }
 
     @NotNull
     @Override
     public DemosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(R.layout.demos_recycler_view_item, parent, false);
+        View itemView = inflater.inflate(R.layout.recycler_view_item_demos, parent, false);
         return new DemosViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(DemosViewHolder holder, int position) {
-        holder.textView.setText(demos[position]);
+        holder.bind(demos[position], onClickListener);
     }
 
     @Override
@@ -39,12 +42,20 @@ public class DemosAdapter extends RecyclerView.Adapter<DemosAdapter.DemosViewHol
         return demos.length;
     }
 
+
     public static class DemosViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView;
+        public TextView demoName;
+        public View itemView;
 
         public DemosViewHolder(View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.demos_recycler_item_name);
+            this.itemView = itemView;
+            demoName = itemView.findViewById(R.id.demos_recycler_item_name);
+        }
+
+        public void bind(String demoName, OnItemClickListener clickListener) {
+            this.demoName.setText(demoName);
+            itemView.setOnClickListener(v -> clickListener.onItemClicked(demoName));
         }
     }
 }
