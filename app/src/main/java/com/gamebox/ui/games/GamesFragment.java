@@ -45,15 +45,6 @@ public class GamesFragment extends Fragment implements OnItemClickListener {
 
     @Override
     public void onItemClicked(String gameName) {
-        if (GAME_NAMES[0].equals(gameName)) {
-            Toast.makeText(this.getContext(), gameName, Toast.LENGTH_LONG).show();
-            // Open game 1
-        } else if (GAME_NAMES[1].equals(gameName)) {
-            Toast.makeText(this.getContext(), gameName, Toast.LENGTH_LONG).show();
-            // Open game 2
-        } else if (GAME_NAMES[2].equals(gameName)) {
-            Toast.makeText(this.getContext(), gameName, Toast.LENGTH_LONG).show();
-            // Open game 3
-        }
+
     }
 }

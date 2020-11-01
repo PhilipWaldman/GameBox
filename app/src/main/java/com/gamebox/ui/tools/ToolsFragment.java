@@ -16,10 +16,13 @@ import com.gamebox.R;
 
 public class ToolsFragment extends Fragment implements OnItemClickListener {
 
+    // TODO: change the names and order
     private static final String[] TOOL_NAMES = new String[]{
-            "Tool 1",
-            "Tool 2",
-            "Tool 3"
+            "Sketch pad",
+            "Flash light morse code",
+            "Enigma machine + other encodings",
+            "Animation maker (images to video)",
+            "Calculator (RPN and traditional)"
     };
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,15 +41,6 @@ public class ToolsFragment extends Fragment implements OnItemClickListener {
 
     @Override
     public void onItemClicked(String toolName) {
-        if (TOOL_NAMES[0].equals(toolName)) {
-            Toast.makeText(this.getContext(), toolName, Toast.LENGTH_LONG).show();
-            // Open tool 1
-        } else if (TOOL_NAMES[1].equals(toolName)) {
-            Toast.makeText(this.getContext(), toolName, Toast.LENGTH_LONG).show();
-            // Open tool 2
-        } else if (TOOL_NAMES[2].equals(toolName)) {
-            Toast.makeText(this.getContext(), toolName, Toast.LENGTH_LONG).show();
-            // Open tool 3
-        }
+
     }
 }

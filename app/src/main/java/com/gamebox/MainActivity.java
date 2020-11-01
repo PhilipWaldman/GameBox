@@ -15,6 +15,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
+// TODO: Ensure all activities are landscape mode compatible
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;

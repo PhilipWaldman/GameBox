@@ -1,5 +1,6 @@
 package com.gamebox.ui.demos;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +18,9 @@ import com.gamebox.R;
 public class DemosFragment extends Fragment implements OnItemClickListener {
 
     private static final String[] DEMO_NAMES = new String[]{
-            "Demo 1",
-            "Demo 2",
-            "Demo 3"
+            "Fall detection algorithm",
+            "Pi estimators",
+            "Rolling shutter effect"
     };
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,14 +40,9 @@ public class DemosFragment extends Fragment implements OnItemClickListener {
     @Override
     public void onItemClicked(String demoName) {
         if (DEMO_NAMES[0].equals(demoName)) {
-            Toast.makeText(this.getContext(), demoName, Toast.LENGTH_LONG).show();
-            // Open demo 1
-        } else if (DEMO_NAMES[1].equals(demoName)) {
-            Toast.makeText(this.getContext(), demoName, Toast.LENGTH_LONG).show();
-            // Open demo 2
-        } else if (DEMO_NAMES[2].equals(demoName)) {
-            Toast.makeText(this.getContext(), demoName, Toast.LENGTH_LONG).show();
-            // Open demo 3
+            // Fall detection algorithm
+            Intent intent = new Intent(this.getContext(), FallDetectAlgoActivity.class);
+            startActivity(intent);
         }
     }
 }

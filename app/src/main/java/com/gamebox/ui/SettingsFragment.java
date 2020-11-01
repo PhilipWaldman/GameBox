@@ -23,10 +23,21 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         }
     }
 
+    public void setLanguage(String language) {
+
+    }
+
     private void loadSettings() {
 
     }
 
     private void saveSettings() {
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        saveSettings();
     }
 }
