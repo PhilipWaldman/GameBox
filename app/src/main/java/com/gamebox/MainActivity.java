@@ -15,7 +15,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
-// TODO: Ensure all activities are landscape mode compatible
+// TODO: Ensure all activities are landscape- and dark mode compatible
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -45,11 +45,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
     }
 
     public interface OnItemClickListener {
-        void onItemClicked(String itemName);
+        void onItemClicked(int itemName);
     }
 }

@@ -16,10 +16,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class ToolsAdapter extends RecyclerView.Adapter<ToolsAdapter.ToolsViewHolder> {
     private final LayoutInflater inflater;
-    private final String[] tools;
+    private final int[] tools;
     OnItemClickListener onClickListener;
 
-    public ToolsAdapter(Context context, String[] tools, OnItemClickListener onClickListener) {
+    public ToolsAdapter(Context context, int[] tools, OnItemClickListener onClickListener) {
         inflater = LayoutInflater.from(context);
         this.onClickListener = onClickListener;
         this.tools = tools;
@@ -53,7 +53,7 @@ public class ToolsAdapter extends RecyclerView.Adapter<ToolsAdapter.ToolsViewHol
             toolName = itemView.findViewById(R.id.tools_recycler_item_name);
         }
 
-        public void bind(String toolName, OnItemClickListener clickListener) {
+        public void bind(int toolName, OnItemClickListener clickListener) {
             this.toolName.setText(toolName);
             itemView.setOnClickListener(v -> clickListener.onItemClicked(toolName));
         }

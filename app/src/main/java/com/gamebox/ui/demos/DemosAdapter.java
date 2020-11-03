@@ -16,10 +16,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class DemosAdapter extends RecyclerView.Adapter<DemosAdapter.DemosViewHolder> {
     private final LayoutInflater inflater;
-    private final String[] demos;
+    private final int[] demos;
     OnItemClickListener onClickListener;
 
-    public DemosAdapter(Context context, String[] demos, OnItemClickListener onClickListener) {
+    public DemosAdapter(Context context, int[] demos, OnItemClickListener onClickListener) {
         inflater = LayoutInflater.from(context);
         this.onClickListener = onClickListener;
         this.demos = demos;
@@ -53,7 +53,7 @@ public class DemosAdapter extends RecyclerView.Adapter<DemosAdapter.DemosViewHol
             demoName = itemView.findViewById(R.id.demos_recycler_item_name);
         }
 
-        public void bind(String demoName, OnItemClickListener clickListener) {
+        public void bind(int demoName, OnItemClickListener clickListener) {
             this.demoName.setText(demoName);
             itemView.setOnClickListener(v -> clickListener.onItemClicked(demoName));
         }

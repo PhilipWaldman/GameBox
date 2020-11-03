@@ -20,7 +20,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.gamebox.R;
 
-// TODO: Make dark mode compatible
 public class FallDetectAlgoActivity extends AppCompatActivity implements SensorEventListener {
 
     private static final float LOWER_THRESHOLD = 4f, UPPER_THRESHOLD = 25f;

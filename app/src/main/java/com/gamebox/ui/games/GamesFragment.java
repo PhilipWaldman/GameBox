@@ -1,11 +1,11 @@
 package com.gamebox.ui.games;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,10 +18,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class GamesFragment extends Fragment implements OnItemClickListener {
 
-    private static final String[] GAME_NAMES = new String[]{
-            "Game 1",
-            "Game 2",
-            "Game 3"
+    private static final int[] GAME_NAMES = new int[]{
+            R.string.tic_tac_toe_game
     };
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,7 +42,10 @@ public class GamesFragment extends Fragment implements OnItemClickListener {
     }
 
     @Override
-    public void onItemClicked(String gameName) {
-
+    public void onItemClicked(int gameName) {
+        if (R.string.tic_tac_toe_game == gameName) { // Tic-tac-toe
+            Intent intent = new Intent(this.getContext(), TicTacToeActivity.class);
+            startActivity(intent);
+        }
     }
 }

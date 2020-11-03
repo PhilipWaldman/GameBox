@@ -16,10 +16,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHolder> {
     private final LayoutInflater inflater;
-    private final String[] games;
+    private final int[] games;
     OnItemClickListener onClickListener;
 
-    public GamesAdapter(Context context, String[] games, OnItemClickListener onClickListener) {
+    public GamesAdapter(Context context, int[] games, OnItemClickListener onClickListener) {
         inflater = LayoutInflater.from(context);
         this.onClickListener = onClickListener;
         this.games = games;
@@ -53,7 +53,7 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
             gameName = itemView.findViewById(R.id.games_recycler_item_name);
         }
 
-        public void bind(String gameName, OnItemClickListener clickListener) {
+        public void bind(int gameName, OnItemClickListener clickListener) {
             this.gameName.setText(gameName);
             itemView.setOnClickListener(v -> clickListener.onItemClicked(gameName));
         }

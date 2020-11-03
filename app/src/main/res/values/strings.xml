@@ -15,10 +15,27 @@
 
     <!-- Activity names -->
     <string name="fall_detection_demo">Fall Detection Algorithm</string>
+    <string name="tic_tac_toe_game">Tic-tac-toe</string>
 
     <!-- Preferences -->
     <string name="dark_mode">Dark mode</string>
     <string name="language">Language</string>
+
+    <!-- Tic-tac-toe -->
+    <string name="ttt_turn_x">It is X\'s turn</string>
+    <string name="ttt_turn_o">It is O\'s turn</string>
+    <string name="ttt_win_x">X has won!</string>
+    <string name="ttt_win_o">O has won!</string>
+    <string name="ttt_tie">Tie</string>
+    <string name="ttt_square00_content_description">Tic-tac-toe square 0, 0</string>
+    <string name="ttt_square01_content_description">Tic-tac-toe square 0, 1</string>
+    <string name="ttt_square02_content_description">Tic-tac-toe square 0, 2</string>
+    <string name="ttt_square10_content_description">Tic-tac-toe square 1, 0</string>
+    <string name="ttt_square11_content_description">Tic-tac-toe square 1, 1</string>
+    <string name="ttt_square12_content_description">Tic-tac-toe square 1, 2</string>
+    <string name="ttt_square20_content_description">Tic-tac-toe square 2, 0</string>
+    <string name="ttt_square21_content_description">Tic-tac-toe square 2, 1</string>
+    <string name="ttt_square22_content_description">Tic-tac-toe square 2, 2</string>
 
     <!-- Fall detector -->
     <string name="reset">Reset</string>
