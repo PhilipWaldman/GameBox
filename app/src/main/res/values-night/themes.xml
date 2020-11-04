@@ -18,4 +18,15 @@
     <style name="Theme.GameBox.Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">?colorPrimary</item>
     </style>
+
+    <style name="Theme.GameBox.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.GameBox.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:background">?colorPrimary</item>
+    </style>
+
+    <style name="Theme.GameBox.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

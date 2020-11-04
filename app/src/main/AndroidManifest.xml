@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameBox">
         <activity
+            android:name=".ui.tools.MorseCodeLightActivity"
+            android:label="@string/morse_code_tool" />
+        <activity
             android:name=".ui.games.TicTacToeActivity"
             android:label="@string/tic_tac_toe_game" />
         <activity

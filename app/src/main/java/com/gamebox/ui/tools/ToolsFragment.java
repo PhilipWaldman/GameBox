@@ -1,5 +1,6 @@
 package com.gamebox.ui.tools;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,7 @@ import com.gamebox.R;
 public class ToolsFragment extends Fragment implements OnItemClickListener {
 
     private static final int[] TOOL_NAMES = new int[]{
-
+            R.string.morse_code_tool
     };
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,6 +36,9 @@ public class ToolsFragment extends Fragment implements OnItemClickListener {
 
     @Override
     public void onItemClicked(int toolName) {
-
+        if (R.string.morse_code_tool == toolName) {
+            Intent intent = new Intent(this.getContext(), MorseCodeLightActivity.class);
+            startActivity(intent);
+        }
     }
 }

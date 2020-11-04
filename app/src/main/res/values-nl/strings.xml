@@ -37,4 +37,7 @@
     <string name="ttt_square21_content_description">Boter-kaas-en-eieren vakje 2, 1</string>
     <string name="ttt_square22_content_description">Boter-kaas-en-eieren vakje 2, 2</string>
     <string name="play_again">Speel opnieuw</string>
+    <string name="morse_code_tool">--</string>
+    <string name="type_a_message">Typ een bericht</string>
+    <string name="play_message_in_morse_code">Laat het bericht in morse code zien</string>
 </resources>

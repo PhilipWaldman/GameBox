@@ -16,6 +16,7 @@
     <!-- Activity names -->
     <string name="fall_detection_demo">Fall Detection Algorithm</string>
     <string name="tic_tac_toe_game">Tic-tac-toe</string>
+    <string name="morse_code_tool">Morse Code Light</string>
 
     <!-- Preferences -->
     <string name="dark_mode">Dark mode</string>
@@ -49,4 +50,8 @@
     <string name="about_fall_detect_button">About the fall detection algorithm</string>
     <string name="how_it_works_title">How it works</string>
     <string name="how_it_works_description">I originally made a simple app to test this algorithm that was developed for a school project. Because of limited time, a simple algorithm was chosen. This is what we wrote in our report to describe the algorithm:\n\nThe algorithm calculates if a fall has occurred using acceleration data. Nearly every smartphone has a 3-axis accelerometer in it. During normal, everyday activities the accelerometer readings will be changing all the time. Different activities have their own acceleration patterns. The acceleration pattern of a fall consists of various stages. First, the acceleration approaches zero as the person is falling and is essentially in free fall. Shortly after that, there is a large spike in the acceleration as the person hits the ground. Then, the acceleration remains constant as the person is lying on the ground. Because the person went from standing to laying, his/her orientation has changed.\n\nPseudocode:\n1. Measures acceleration in the x-, y-, and z-axes.\n2. Calculate the sum of the three axes.\n3. If the acceleration is below 4 m/s^2 , the person may be falling, continue to the next step; else return to 1.\n4. If within 0.5 s the acceleration is above 25 m/s^2 , the person may have hit the ground, continue to the next step; else return to 1.\n5. After 0.5 s the person will have stabilized. If his/her orientation has changed by more than 20° compared to before the fall, the person may be lying on the ground, continue to the next step; else return to 1.\n6. For the next 3 s, if the person’s orientation remains within 20°, he/she may not be able to move anymore and it is likely that this was a fall, sound and send the alarm; else return to 1.\n\nThe change in orientation is calculated by finding the angle between the acceleration vectors at two points in time. The angle between two vectors, a and b, is a•b=ǁaǁǁbǁcosθ → θ=arccos([a•b]/[ǁaǁǁbǁ]). If this angle is greater than 20°, the orientation has changed sufficiently for this purpose.\n\nBecause this app was used for testing, the raw acceleration data along the x-, y-, and z-axes, the total acceleration, the lowest and highest acceleration measured, the change in angle (only during certain state of the fall), and the current state the fall is in. The different states of the fall change the background color. Instead of an alarm going off when the fall has been detected, the phone vibrates.</string>
+
+    <!-- Morse Code -->
+    <string name="type_a_message">Type a message</string>
+    <string name="play_message_in_morse_code">Show the message in morse code</string>
 </resources>
