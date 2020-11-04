@@ -19,7 +19,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class GamesFragment extends Fragment implements OnItemClickListener {
 
     private static final int[] GAME_NAMES = new int[]{
-            R.string.tic_tac_toe_game
+            R.string.tic_tac_toe_game,
+            R.string.simon_game
     };
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,6 +46,9 @@ public class GamesFragment extends Fragment implements OnItemClickListener {
     public void onItemClicked(int gameName) {
         if (R.string.tic_tac_toe_game == gameName) { // Tic-tac-toe
             Intent intent = new Intent(this.getContext(), TicTacToeActivity.class);
+            startActivity(intent);
+        } else if (R.string.simon_game == gameName) {
+            Intent intent = new Intent(this.getContext(), SimonActivity.class);
             startActivity(intent);
         }
     }

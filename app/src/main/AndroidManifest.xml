@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GameBox">
+        <activity android:name=".ui.games.SimonActivity"></activity>
         <activity
             android:name=".ui.tools.MorseCodeLightActivity"
             android:label="@string/morse_code_tool" />

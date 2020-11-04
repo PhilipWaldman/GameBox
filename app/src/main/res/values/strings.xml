@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Game Box</string>
+    <string name="app_name" translatable="false">Game Box</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_subtitle">A collection of fun games, useful tools, and more.</string>
@@ -16,6 +16,7 @@
     <!-- Activity names -->
     <string name="fall_detection_demo">Fall Detection Algorithm</string>
     <string name="tic_tac_toe_game">Tic-tac-toe</string>
+    <string name="simon_game">Simon</string>
     <string name="morse_code_tool">Morse Code Light</string>
 
     <!-- Preferences -->
