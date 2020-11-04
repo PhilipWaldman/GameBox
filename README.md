@@ -4,7 +4,7 @@ GameBox is a collection of games, tools, and demos for on your phone. The games 
 ## Features
 
 ### Games
-
+* Tic-tac-toe
 
 ### Highscores
 

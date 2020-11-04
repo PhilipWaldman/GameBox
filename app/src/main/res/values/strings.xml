@@ -21,6 +21,9 @@
     <string name="dark_mode">Dark mode</string>
     <string name="language">Language</string>
 
+    <!-- Games general -->
+    <string name="play_again">Play again</string>
+
     <!-- Tic-tac-toe -->
     <string name="ttt_turn_x">It is X\'s turn</string>
     <string name="ttt_turn_o">It is O\'s turn</string>

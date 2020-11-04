@@ -36,4 +36,5 @@
     <string name="ttt_square20_content_description">Boter-kaas-en-eieren vakje 2, 0</string>
     <string name="ttt_square21_content_description">Boter-kaas-en-eieren vakje 2, 1</string>
     <string name="ttt_square22_content_description">Boter-kaas-en-eieren vakje 2, 2</string>
+    <string name="play_again">Speel opnieuw</string>
 </resources>

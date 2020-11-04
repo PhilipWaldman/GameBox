@@ -1,10 +1,12 @@
 package com.gamebox.ui.games;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.gamebox.R;
 
@@ -84,12 +86,34 @@ public class TicTacToeActivity extends AppCompatActivity {
                 makeMark(2, 2);
             }
         });
+
+        Button playAgain = findViewById(R.id.ttt_again);
+        playAgain.setOnClickListener(v -> playAgain());
+    }
+
+    private void playAgain() {
+        gameEnded = false;
+
+        gameBoard = new String[3][3];
+
+        turnO = (int) (Math.random() * 2) == 0;
+        turnView.setText(turnO ? R.string.ttt_turn_o : R.string.ttt_turn_x);
+
+        winnerView.setText("");
+
+        for (ImageButton[] row : boardButtons) {
+            for (ImageButton square : row) {
+                square.setImageDrawable(null);
+            }
+        }
     }
 
     private void makeMark(int row, int col) {
         if (gameBoard[row][col] == null) {
             gameBoard[row][col] = turnO ? "O" : "X";
-            boardButtons[row][col].setImageResource(turnO ? R.drawable.ic_tic_tac_toe_o : R.drawable.ic_tic_tac_toe_x);
+//            boardButtons[row][col].setImageResource(turnO ? R.drawable.ic_tic_tac_toe_o : R.drawable.ic_tic_tac_toe_x);
+            boardButtons[row][col].setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+                    turnO ? R.drawable.ic_tic_tac_toe_o : R.drawable.ic_tic_tac_toe_x, getTheme()));
             hasGameEnded();
             switchTurn();
         }

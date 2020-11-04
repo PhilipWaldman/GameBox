@@ -18,8 +18,6 @@ public class DemosFragment extends Fragment implements OnItemClickListener {
 
     private static final int[] DEMO_NAMES = new int[]{
             R.string.fall_detection_demo
-//            "Pi estimators",
-//            "Rolling shutter effect"
     };
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
