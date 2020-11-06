@@ -48,11 +48,11 @@
                 android:src="@drawable/ic_simon_yellow_off" />
 
             <ImageButton
-                android:id="@+id/simon_blue_button"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
                 android:contentDescription="@string/simon_blue_button_content_description"
+                android:id="@+id/simon_blue_button"
+                android:layout_width="wrap_content"
                 android:src="@drawable/ic_simon_blue_off" />
         </TableRow>
 
