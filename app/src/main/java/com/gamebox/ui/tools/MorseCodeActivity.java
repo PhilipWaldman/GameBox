@@ -18,8 +18,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gamebox.R;
+import com.gamebox.util.ToneGenerator;
 
-public class MorseCodeLightActivity extends AppCompatActivity {
+public class MorseCodeActivity extends AppCompatActivity {
 
     private static final int NO_FLASH = 1, WRONG_VERSION = 2;
     private static final String DOT = "·";
@@ -30,6 +31,7 @@ public class MorseCodeLightActivity extends AppCompatActivity {
     private CameraManager cameraManager;
     private TextView speedView;
     private int morseSpeed = 200;
+    private ToneGenerator dotBeep, dashBeep;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -48,6 +50,9 @@ public class MorseCodeLightActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+            dotBeep = new ToneGenerator(1000, (double) morseSpeed / 1000.0);
+            dashBeep = new ToneGenerator(1000, (double) morseSpeed / 1000.0 * 3);
+
             speedView = findViewById(R.id.morse_speed_text);
             speedView.setText("Morse speed: " + morseSpeed + " ms");
             SeekBar speedBar = findViewById(R.id.morse_speed);
@@ -59,6 +64,9 @@ public class MorseCodeLightActivity extends AppCompatActivity {
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                     morseSpeed = progress * 10;
                     speedView.setText("Morse speed: " + morseSpeed + " ms");
+
+                    dotBeep = new ToneGenerator(1000, (double) morseSpeed / 1000.0);
+                    dashBeep = new ToneGenerator(1000, (double) morseSpeed / 1000.0 * 3);
                 }
 
                 @Override
@@ -122,8 +130,10 @@ public class MorseCodeLightActivity extends AppCompatActivity {
             String symbol = morse.substring(i, i + 1);
             delay(morseSpeed);
             if (DOT.equals(symbol)) {
+                dotBeep.play();
                 blinkFlashLight(morseSpeed);
             } else {
+                dashBeep.play();
                 blinkFlashLight(morseSpeed * 3);
             }
         }

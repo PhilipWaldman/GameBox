@@ -22,8 +22,8 @@ import com.gamebox.R;
 
 public class FallDetectAlgoActivity extends AppCompatActivity implements SensorEventListener {
 
-    private static final float LOWER_THRESHOLD = 4f, UPPER_THRESHOLD = 25f;
-    private static final int ANGLE_THRESHOLD = 20, HALF_SECOND = 500, THREE_SECONDS = 3000;
+    private static final float LOWER_THRESHOLD = 0.5f, UPPER_THRESHOLD = 50f;
+    private static final int ANGLE_THRESHOLD = 45, HALF_SECOND = 500, FIVE_SECONDS = 5000;
     private static final int IDLE = 0, FREE_FALL = 1, IMPACT = 2, AFTERMATH = 3;
     private final float[] preFallAcc = new float[3], postFallAcc = new float[3];
     private long freeFallStartTime, impactTime, layingOnGroundTime;
@@ -126,7 +126,7 @@ public class FallDetectAlgoActivity extends AppCompatActivity implements SensorE
                 }
                 break;
             case AFTERMATH:
-                if (curTime - layingOnGroundTime < THREE_SECONDS) {
+                if (curTime - layingOnGroundTime < FIVE_SECONDS) {
                     // Moved within 10 s of fall
                     if (hasOrientationChanged(postFallAcc[0], postFallAcc[1], postFallAcc[2], xAcc, yAcc, zAcc)) {
                         state = IDLE;

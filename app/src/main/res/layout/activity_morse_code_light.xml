@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.tools.MorseCodeLightActivity">
+    tools:context=".ui.tools.MorseCodeActivity">
 
     <EditText
         android:id="@+id/morse_code_message"

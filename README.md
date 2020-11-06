@@ -5,12 +5,13 @@ GameBox is a collection of games, tools, and demos for on your phone. The games 
 
 ### Games
 * Tic-tac-toe
+* Simon
 
 ### Highscores
 
 
 ### Tools
-
+* Morse code
 
 ###  Demos
 * Fall detection algorithm

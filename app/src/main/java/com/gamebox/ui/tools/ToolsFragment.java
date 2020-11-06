@@ -37,7 +37,7 @@ public class ToolsFragment extends Fragment implements OnItemClickListener {
     @Override
     public void onItemClicked(int toolName) {
         if (R.string.morse_code_tool == toolName) {
-            Intent intent = new Intent(this.getContext(), MorseCodeLightActivity.class);
+            Intent intent = new Intent(this.getContext(), MorseCodeActivity.class);
             startActivity(intent);
         }
     }

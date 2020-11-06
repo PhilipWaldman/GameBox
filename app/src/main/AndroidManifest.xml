@@ -12,9 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GameBox">
-        <activity android:name=".ui.games.SimonActivity"></activity>
         <activity
-            android:name=".ui.tools.MorseCodeLightActivity"
+            android:name=".ui.games.SimonActivity"
+            android:label="@string/simon_game" />
+        <activity
+            android:name=".ui.tools.MorseCodeActivity"
             android:label="@string/morse_code_tool" />
         <activity
             android:name=".ui.games.TicTacToeActivity"
