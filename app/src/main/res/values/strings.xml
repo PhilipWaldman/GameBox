@@ -61,4 +61,5 @@
     <string name="simon_green_button_content_description">Green button</string>
     <string name="simon_blue_button_content_description">Blue button</string>
     <string name="simon_yellow_button_content_description">Yellow button</string>
+    <string name="start">Start</string>
 </resources>

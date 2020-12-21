@@ -44,4 +44,5 @@
     <string name="simon_green_button_content_description">Groene knop</string>
     <string name="simon_blue_button_content_description">Blauwe knop</string>
     <string name="simon_yellow_button_content_description">Gele knop</string>
+    <string name="start">Start</string>
 </resources>
