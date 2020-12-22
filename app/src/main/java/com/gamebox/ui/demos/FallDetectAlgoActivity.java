@@ -74,7 +74,7 @@ public class FallDetectAlgoActivity extends AppCompatActivity implements SensorE
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
     @Override
     public void onSensorChanged(SensorEvent event) {
-        // ------------------------------------------------- Algorithm start --------------------------------------------------------------
+        // ------------------------- Algorithm start -------------------------
         float xAcc = event.values[0];
         float yAcc = event.values[1];
         float zAcc = event.values[2];
@@ -152,7 +152,7 @@ public class FallDetectAlgoActivity extends AppCompatActivity implements SensorE
                 }
                 break;
         }
-        // ------------------------------------------------- Algorithm end --------------------------------------------------------------
+        // ------------------------- Algorithm end -------------------------
 
         minAcc = Math.min(totalAcc, minAcc);
         maxAcc = Math.max(totalAcc, maxAcc);
