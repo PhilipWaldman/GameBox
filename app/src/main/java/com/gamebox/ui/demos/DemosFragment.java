@@ -17,7 +17,8 @@ import com.gamebox.R;
 public class DemosFragment extends Fragment implements OnItemClickListener {
 
     private static final int[] DEMO_NAMES = new int[]{
-            R.string.fall_detection_demo
+            R.string.fall_detection_demo,
+            R.string.pi_estimators_demo
     };
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,6 +39,9 @@ public class DemosFragment extends Fragment implements OnItemClickListener {
     public void onItemClicked(int demoName) {
         if (R.string.fall_detection_demo == demoName) { // Fall detection algorithm
             Intent intent = new Intent(this.getContext(), FallDetectAlgoActivity.class);
+            startActivity(intent);
+        } else if (R.string.pi_estimators_demo == demoName) { // Pi estimators
+            Intent intent = new Intent(this.getContext(), PiEstimationActivity.class);
             startActivity(intent);
         }
     }

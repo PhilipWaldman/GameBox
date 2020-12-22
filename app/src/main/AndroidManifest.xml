@@ -13,6 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameBox">
         <activity
+            android:name=".ui.demos.PiEstimationActivity"
+            android:label="@string/pi_estimators_demo"
+            android:theme="@style/Theme.GameBox.NoActionBar" />
+        <activity
             android:name=".ui.games.SimonActivity"
             android:label="@string/simon_game" />
         <activity

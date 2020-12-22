@@ -45,4 +45,7 @@
     <string name="simon_blue_button_content_description">Blauwe knop</string>
     <string name="simon_yellow_button_content_description">Gele knop</string>
     <string name="start">Start</string>
+    <string name="pi_estimators_demo">Pi Berekenaars</string>
+    <string name="rand_points_pi">Willekeurige Punten</string>
+    <string name="buffon_needles_pi">Naalden van Buffon</string>
 </resources>

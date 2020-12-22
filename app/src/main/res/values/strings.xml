@@ -15,6 +15,7 @@
 
     <!-- Activity names -->
     <string name="fall_detection_demo">Fall Detection Algorithm</string>
+    <string name="pi_estimators_demo">Pi Estimators</string>
     <string name="tic_tac_toe_game">Tic-tac-toe</string>
     <string name="simon_game">Simon</string>
     <string name="morse_code_tool">Morse Code</string>
@@ -62,4 +63,8 @@
     <string name="simon_blue_button_content_description">Blue button</string>
     <string name="simon_yellow_button_content_description">Yellow button</string>
     <string name="start">Start</string>
+
+    <!-- Pi Est -->
+    <string name="rand_points_pi">Random Points</string>
+    <string name="buffon_needles_pi">Buffon\'s Needles</string>
 </resources>
