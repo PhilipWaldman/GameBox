@@ -33,4 +33,6 @@ public class PiRandPointsFragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_pi_estimation, container, false);
     }
+
+    // use custom drawing https://developer.android.com/training/custom-views/custom-drawing#java
 }

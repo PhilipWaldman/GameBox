@@ -30,4 +30,6 @@ public class PiBuffonFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_pi_buffon, container, false);
     }
+
+    // use custom drawing https://developer.android.com/training/custom-views/custom-drawing#java
 }
