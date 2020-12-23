@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -36,9 +37,13 @@ public class ToolsFragment extends Fragment implements OnItemClickListener {
 
     @Override
     public void onItemClicked(int toolName) {
-        if (R.string.morse_code_tool == toolName) {
-            Intent intent = new Intent(this.getContext(), MorseCodeActivity.class);
-            startActivity(intent);
+        Class<?> c = null;
+        if (R.string.morse_code_tool == toolName) { // Morse Code
+            c = MorseCodeActivity.class;
+            Toast.makeText(this.getContext(), "This tool is currently under development...", Toast.LENGTH_LONG).show();
+            return;
         }
+        Intent intent = new Intent(this.getContext(), c);
+        startActivity(intent);
     }
 }

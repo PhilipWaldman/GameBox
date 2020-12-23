@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -37,12 +38,15 @@ public class DemosFragment extends Fragment implements OnItemClickListener {
 
     @Override
     public void onItemClicked(int demoName) {
+        Class<?> c = null;
         if (R.string.fall_detection_demo == demoName) { // Fall detection algorithm
-            Intent intent = new Intent(this.getContext(), FallDetectAlgoActivity.class);
-            startActivity(intent);
+            c = FallDetectAlgoActivity.class;
         } else if (R.string.pi_estimators_demo == demoName) { // Pi estimators
-            Intent intent = new Intent(this.getContext(), PiEstimationActivity.class);
-            startActivity(intent);
+            c = PiEstimationActivity.class;
+            Toast.makeText(this.getContext(), "This demo is currently under development...", Toast.LENGTH_LONG).show();
+            return;
         }
+        Intent intent = new Intent(this.getContext(), c);
+        startActivity(intent);
     }
 }

@@ -48,4 +48,6 @@
     <string name="pi_estimators_demo">Pi Berekenaars</string>
     <string name="rand_points_pi">Willekeurige Punten</string>
     <string name="buffon_needles_pi">Naalden van Buffon</string>
+    <string name="face_clicker_game">Klik het Gezicht</string>
+    <string name="stop">Stop</string>
 </resources>

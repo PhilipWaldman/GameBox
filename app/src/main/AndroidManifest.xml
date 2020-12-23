@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GameBox">
+        <activity android:name=".ui.games.FaceClickerActivity"></activity>
         <activity
             android:name=".ui.demos.PiEstimationActivity"
             android:label="@string/pi_estimators_demo"

@@ -1,4 +1,4 @@
-package com.gamebox.ui.demos.ui.main;
+package com.gamebox.ui.demos.piEstimators;
 
 import android.content.Context;
 

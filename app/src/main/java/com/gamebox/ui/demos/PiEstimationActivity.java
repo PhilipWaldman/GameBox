@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.gamebox.R;
-import com.gamebox.ui.demos.ui.main.SectionsPagerAdapter;
+import com.gamebox.ui.demos.piEstimators.SectionsPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class PiEstimationActivity extends AppCompatActivity {
