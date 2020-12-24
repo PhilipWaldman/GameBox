@@ -21,7 +21,8 @@ public class GamesFragment extends Fragment implements OnItemClickListener {
 
     private static final int[] GAME_NAMES = new int[]{
             R.string.tic_tac_toe_game,
-            R.string.simon_game
+            R.string.simon_game,
+            R.string.face_clicker_game
     };
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,6 +51,10 @@ public class GamesFragment extends Fragment implements OnItemClickListener {
             c = TicTacToeActivity.class;
         } else if (R.string.simon_game == gameName) { // Simon
             c = SimonActivity.class;
+            Toast.makeText(this.getContext(), "This game is currently under development...", Toast.LENGTH_LONG).show();
+            return;
+        } else if (R.string.face_clicker_game == gameName) { // Face Clicker
+            c = FaceClickerActivity.class;
             Toast.makeText(this.getContext(), "This game is currently under development...", Toast.LENGTH_LONG).show();
             return;
         }
