@@ -22,11 +22,30 @@ import com.gamebox.R;
 
 public class FallDetectAlgoActivity extends AppCompatActivity implements SensorEventListener {
 
-    private static final float LOWER_THRESHOLD = 0.5f, UPPER_THRESHOLD = 50f;
-    private static final int ANGLE_THRESHOLD = 45, HALF_SECOND = 500, FIVE_SECONDS = 5000;
-    private static final int IDLE = 0, FREE_FALL = 1, IMPACT = 2, AFTERMATH = 3;
+    /**
+     * The lower threshold used in the algorithm. In m/s^2.
+     */
+    private static final float LOWER_THRESHOLD = 0.5f;
+    /**
+     * The upper threshold used in the algorithm. In m/s^2.
+     */
+    private static final float UPPER_THRESHOLD = 50f;
+    /**
+     * The angle threshold used in the algorithm. In degrees.
+     */
+    private static final int ANGLE_THRESHOLD = 45;
+    /**
+     * A half a second in ms.
+     */
+    private static final int HALF_SECOND = 500;
+    /**
+     * Five seconds in ms.
+     */
+    private static final int FIVE_SECONDS = 5000;
     private final float[] preFallAcc = new float[3], postFallAcc = new float[3];
-    private long freeFallStartTime, impactTime, layingOnGroundTime;
+    private long freeFallStartTime;
+    private long impactTime;
+    private long layingOnGroundTime;
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private Vibrator vibrator;
@@ -34,7 +53,7 @@ public class FallDetectAlgoActivity extends AppCompatActivity implements SensorE
     private TextView xAccView, yAccView, zAccView, totalAccView, minAccView, maxAccView, fallStateView, angleView;
     private float maxAcc = Float.MIN_VALUE, minAcc = Float.MAX_VALUE;
     private double angle = 0;
-    private int state;
+    private State state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +65,7 @@ public class FallDetectAlgoActivity extends AppCompatActivity implements SensorE
 
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
-        state = IDLE;
+        state = State.IDLE;
 
         bg = findViewById(R.id.fall_detect_bg);
         xAccView = findViewById(R.id.xAcc);
@@ -86,7 +105,7 @@ public class FallDetectAlgoActivity extends AppCompatActivity implements SensorE
                 if (totalAcc < LOWER_THRESHOLD) {
                     // Falling
                     freeFallStartTime = curTime;
-                    state = FREE_FALL;
+                    state = State.FREE_FALL;
                     bg.setBackgroundColor(Color.CYAN);
                 } else {
                     // Not falling
@@ -99,12 +118,12 @@ public class FallDetectAlgoActivity extends AppCompatActivity implements SensorE
             case FREE_FALL:
                 if (curTime - freeFallStartTime <= HALF_SECOND && totalAcc > UPPER_THRESHOLD) {
                     // Impact
-                    state = IMPACT;
+                    state = State.IMPACT;
                     impactTime = curTime;
                     bg.setBackgroundColor(Color.YELLOW);
                 } else if (curTime - freeFallStartTime > HALF_SECOND) {
                     // No impact within 0.5 s
-                    state = IDLE;
+                    state = State.IDLE;
                     bg.setBackgroundColor(Color.WHITE);
                 }
                 break;
@@ -112,7 +131,7 @@ public class FallDetectAlgoActivity extends AppCompatActivity implements SensorE
                 if (curTime - impactTime > HALF_SECOND) {
                     if (hasOrientationChanged(preFallAcc[0], preFallAcc[1], preFallAcc[2], xAcc, yAcc, zAcc)) {
                         // Orientation has changed
-                        state = AFTERMATH;
+                        state = State.AFTERMATH;
                         layingOnGroundTime = curTime;
                         postFallAcc[0] = xAcc;
                         postFallAcc[1] = yAcc;
@@ -120,7 +139,7 @@ public class FallDetectAlgoActivity extends AppCompatActivity implements SensorE
                         bg.setBackgroundColor(0xFFFFA500);
                     } else {
                         // Orientation has stayed the same
-                        state = IDLE;
+                        state = State.IDLE;
                         bg.setBackgroundColor(Color.WHITE);
                     }
                 }
@@ -129,7 +148,7 @@ public class FallDetectAlgoActivity extends AppCompatActivity implements SensorE
                 if (curTime - layingOnGroundTime < FIVE_SECONDS) {
                     // Moved within 10 s of fall
                     if (hasOrientationChanged(postFallAcc[0], postFallAcc[1], postFallAcc[2], xAcc, yAcc, zAcc)) {
-                        state = IDLE;
+                        state = State.IDLE;
                     }
                 } else {
                     // Send alarm here
@@ -148,7 +167,7 @@ public class FallDetectAlgoActivity extends AppCompatActivity implements SensorE
                         }
                     }
                     bg.setBackgroundColor(Color.WHITE);
-                    state = IDLE;
+                    state = State.IDLE;
                 }
                 break;
         }
@@ -218,4 +237,6 @@ public class FallDetectAlgoActivity extends AppCompatActivity implements SensorE
         AlertDialog about = builder.create();
         about.show();
     }
+
+    enum State {IDLE, FREE_FALL, IMPACT, AFTERMATH}
 }
