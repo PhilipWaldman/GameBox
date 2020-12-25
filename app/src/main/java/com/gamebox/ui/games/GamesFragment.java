@@ -55,8 +55,6 @@ public class GamesFragment extends Fragment implements OnItemClickListener {
             return;
         } else if (R.string.face_clicker_game == gameName) { // Face Clicker
             c = FaceClickerActivity.class;
-            Toast.makeText(this.getContext(), "This game is currently under development...", Toast.LENGTH_LONG).show();
-            return;
         }
         Intent intent = new Intent(this.getContext(), c);
         startActivity(intent);
