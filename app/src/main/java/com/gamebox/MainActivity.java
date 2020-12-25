@@ -15,7 +15,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
-// TODO: Ensure all activities are landscape- and dark mode compatible
+// TODO: Ensure all activities are landscape- and dark mode compatible and work on different screen sizes
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
