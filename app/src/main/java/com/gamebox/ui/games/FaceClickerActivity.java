@@ -43,7 +43,7 @@ public class FaceClickerActivity extends AppCompatActivity {
     private boolean gameStarted = false; // Whether the game has started.
     private int round; // The current round.
     private int score; // The current score.
-    private int numFaces = 0; // The number of faces to turned on this round.
+    private int numFaces; // The number of faces to turned on this round.
     private Timer gameLoop; // The timer for the game loop.
 
     @Override
@@ -151,8 +151,9 @@ public class FaceClickerActivity extends AppCompatActivity {
      */
     private void startGame() {
         // Values are initialized.
+        numFaces = 0;
         round = 0;
-        score = -1;
+        score = 0;
         gameStarted = true;
         startButtonText.setValue(R.string.stop);
 
