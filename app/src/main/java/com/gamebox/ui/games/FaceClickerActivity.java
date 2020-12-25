@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import com.gamebox.R;
+import com.gamebox.util.ToneGenerator;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,13 +19,16 @@ import java.util.TimerTask;
 
 public class FaceClickerActivity extends AppCompatActivity {
 
+    private static final ToneGenerator FACE_CLICK = new ToneGenerator(555, 0.1),
+            FAIL = new ToneGenerator(333, 0.3),
+            LEVEL_UP = new ToneGenerator(444, 0.2);
     private final Random random = new Random();
     private final ImageButton[][] faceButtons = new ImageButton[3][3];
     MutableLiveData<Boolean>[][] faceStatesLD; // false = off, true = on
     MutableLiveData<Integer> startButtonText;
     MutableLiveData<String> scoreViewText;
     private boolean gameStarted = false;
-    private int round = 0, score = 0;
+    private int round, score;
     private int numFaces = 0;
     private Timer timer;
 
@@ -64,6 +68,7 @@ public class FaceClickerActivity extends AppCompatActivity {
                     if (gameStarted) {
                         if (faceStatesLD[r][c].getValue()) {
                             turnFaceOff(r, c);
+                            FACE_CLICK.play();
                         } else {
                             endGame();
                         }
@@ -99,7 +104,8 @@ public class FaceClickerActivity extends AppCompatActivity {
     }
 
     private void startGame() {
-        score = 0;
+        round = 0;
+        score = -1;
         gameStarted = true;
         startButtonText.setValue(R.string.stop);
 
@@ -119,6 +125,9 @@ public class FaceClickerActivity extends AppCompatActivity {
             endGame();
             return;
         }
+        if (round % 10 == 0) {
+            LEVEL_UP.play();
+        }
         score += numFaces;
         scoreViewText.postValue("Score: " + score);
         round++;
@@ -135,6 +144,7 @@ public class FaceClickerActivity extends AppCompatActivity {
                 timer.cancel();
             }
         }
+        FAIL.play();
     }
 
     private void turnOnFacesForNextRound(int numFaces) {
