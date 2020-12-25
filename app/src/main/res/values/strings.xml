@@ -69,4 +69,16 @@
     <!-- Pi Est -->
     <string name="rand_points_pi">Random Points</string>
     <string name="buffon_needles_pi">Buffon\'s Needles</string>
+
+    <!-- Face Clicker -->
+    <string name="score">Score</string>
+    <string name="face_0_0_content_description">Face button 0, 0</string>
+    <string name="face_0_1_content_description">Face button 0, 1</string>
+    <string name="face_0_2_content_description">Face button 0, 2</string>
+    <string name="face_1_0_content_description">Face button 1, 0</string>
+    <string name="face_1_1_content_description">Face button 1, 1</string>
+    <string name="face_1_2_content_description">Face button 1, 2</string>
+    <string name="face_2_0_content_description">Face button 2, 0</string>
+    <string name="face_2_1_content_description">Face button 2, 1</string>
+    <string name="face_2_2_content_description">Face button 2, 2</string>
 </resources>

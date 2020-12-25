@@ -50,4 +50,14 @@
     <string name="buffon_needles_pi">Naalden van Buffon</string>
     <string name="face_clicker_game">Klik het Gezicht</string>
     <string name="stop">Stop</string>
+    <string name="score">Score</string>
+    <string name="face_0_0_content_description">Klik het Gezicht knop 0, 0</string>
+    <string name="face_0_1_content_description">Klik het Gezicht knop 0, 1</string>
+    <string name="face_0_2_content_description">Klik het Gezicht knop 0, 2</string>
+    <string name="face_1_0_content_description">Klik het Gezicht knop 1, 0</string>
+    <string name="face_1_1_content_description">Klik het Gezicht knop 1, 1</string>
+    <string name="face_1_2_content_description">Klik het Gezicht knop 1, 2</string>
+    <string name="face_2_0_content_description">Klik het Gezicht knop 2, 0</string>
+    <string name="face_2_1_content_description">Klik het Gezicht knop 2, 1</string>
+    <string name="face_2_2_content_description">Klik het Gezicht knop 2, 2</string>
 </resources>
