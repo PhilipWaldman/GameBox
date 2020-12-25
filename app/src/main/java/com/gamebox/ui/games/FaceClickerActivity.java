@@ -6,32 +6,44 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.gamebox.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class FaceClickerActivity extends AppCompatActivity {
 
     private final Random random = new Random();
     private final ImageButton[][] faceButtons = new ImageButton[3][3];
-    private final boolean[][] faceStates = new boolean[3][3]; // false = off, true = on
-    private Button startButton;
+    MutableLiveData<Boolean>[][] faceStatesLD; // false = off, true = on
+    MutableLiveData<Integer> startButtonText;
+    MutableLiveData<String> scoreViewText;
     private boolean gameStarted = false;
     private int round = 0, score = 0;
-    private TextView scoreView;
+    private int numFaces = 0;
+    private Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_face_clicker);
 
-        scoreView = findViewById(R.id.face_score);
-
-        for (boolean[] row : faceStates) {
-            Arrays.fill(row, false);
+        faceStatesLD = new MutableLiveData[faceButtons.length][faceButtons[0].length];
+        for (int i = 0; i < faceButtons.length; i++) {
+            for (int j = 0; j < faceButtons[i].length; j++) {
+                int c = j;
+                int r = i;
+                faceStatesLD[r][c] = new MutableLiveData<>();
+                faceStatesLD[r][c].setValue(false);
+                Observer<Boolean> faceStateObserver = state -> faceButtons[r][c].setImageResource(
+                        state ? R.drawable.ic_face_clicker_face : R.drawable.ic_face_clicker_no_face);
+                faceStatesLD[r][c].observe(this, faceStateObserver);
+            }
         }
 
         faceButtons[0][0] = findViewById(R.id.face_0_0);
@@ -50,7 +62,7 @@ public class FaceClickerActivity extends AppCompatActivity {
                 int r = i;
                 faceButtons[r][c].setOnClickListener(v -> {
                     if (gameStarted) {
-                        if (faceStates[r][c]) {
+                        if (faceStatesLD[r][c].getValue()) {
                             turnFaceOff(r, c);
                         } else {
                             endGame();
@@ -60,7 +72,7 @@ public class FaceClickerActivity extends AppCompatActivity {
             }
         }
 
-        startButton = findViewById(R.id.face_start_button);
+        Button startButton = findViewById(R.id.face_start_button);
         startButton.setOnClickListener(v -> {
             if (!gameStarted) {
                 startGame();
@@ -68,52 +80,60 @@ public class FaceClickerActivity extends AppCompatActivity {
                 endGame();
             }
         });
+        startButtonText = new MutableLiveData<>();
+        Observer<Integer> startButtonObserver = startButton::setText;
+        startButtonText.observe(this, startButtonObserver);
+
+        TextView scoreView = findViewById(R.id.face_score);
+        scoreViewText = new MutableLiveData<>();
+        Observer<String> scoreViewObserver = scoreView::setText;
+        scoreViewText.observe(this, scoreViewObserver);
     }
 
     private void turnFaceOff(int row, int col) {
-        faceStates[row][col] = false;
-        faceButtons[row][col].setImageResource(R.drawable.ic_face_clicker_no_face);
+        faceStatesLD[row][col].postValue(false);
     }
 
     private void turnFaceOn(int row, int col) {
-        faceStates[row][col] = true;
-        faceButtons[row][col].setImageResource(R.drawable.ic_face_clicker_face);
+        faceStatesLD[row][col].postValue(true);
     }
 
     private void startGame() {
+        score = 0;
         gameStarted = true;
-        startButton.setText(R.string.stop);
+        startButtonText.setValue(R.string.stop);
 
-//        long prevTime = System.currentTimeMillis();
-        int numFaces = 0;
-        while (gameStarted) {
-//            long curTime = System.currentTimeMillis();
-            try {
-                Thread.sleep(1000); // TODO: need better game loop design pattern
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        int delay = 2000;
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                synchronized (this) {
+                    tick();
+                }
             }
-//            if (curTime / 1000 != prevTime / 1000) {
-//                prevTime = curTime;
-            if (!areAllFacesOff()) {
-                endGame();
-                return;
-            }
-            score += numFaces;
-            String scoreText = "Score: " + score;
-            scoreView.setText(scoreText);
-            round++;
-            numFaces = Math.min((round - 1) / 10 + 1, 9);
-            turnOnFacesForNextRound(numFaces);
-//            }
+        }, 1000, delay);
+    }
+
+    private void tick() {
+        if (!areAllFacesOff()) {
+            endGame();
+            return;
         }
+        score += numFaces;
+        scoreViewText.postValue("Score: " + score);
+        round++;
+        numFaces = Math.min((round - 1) / 10 + 1, 9);
+        turnOnFacesForNextRound(numFaces);
     }
 
     private void endGame() {
         gameStarted = false;
-        startButton.setText(R.string.start);
-        for (boolean[] row : faceStates) {
-            Arrays.fill(row, false);
+        startButtonText.postValue(R.string.start);
+        for (int r = 0; r < faceButtons.length; r++) {
+            for (int c = 0; c < faceButtons[r].length; c++) {
+                turnFaceOff(r, c);
+                timer.cancel();
+            }
         }
     }
 
@@ -123,15 +143,15 @@ public class FaceClickerActivity extends AppCompatActivity {
             int num = random.nextInt(9);
             if (!faceNumbers.contains(num)) {
                 faceNumbers.add(num);
-                turnFaceOn(num / faceStates.length, num % faceStates.length);
+                turnFaceOn(num / faceButtons.length, num % faceButtons.length);
             }
         }
     }
 
     private boolean areAllFacesOff() {
-        for (boolean[] row : faceStates) {
-            for (boolean state : row) {
-                if (state) {
+        for (MutableLiveData<Boolean>[] row : faceStatesLD) {
+            for (MutableLiveData<Boolean> state : row) {
+                if (state.getValue()) {
                     return false;
                 }
             }
