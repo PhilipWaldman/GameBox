@@ -205,7 +205,7 @@ public class FaceClickerActivity extends AppCompatActivity {
             endGame();
             return;
         }
-        if (round % 10 == 0) {
+        if (round % 10 == 0 && numFaces < 9) {
             // Level up sound.
             LEVEL_UP.play();
         }
@@ -213,7 +213,14 @@ public class FaceClickerActivity extends AppCompatActivity {
         scoreViewText.postValue("Score: " + score);
         round++;
         numFaces = Math.min((round - 1) / 10 + 1, 9);
-        turnOnFacesForNextRound(numFaces);
+        if (numFaces < 9) {
+            // If less than 9 faces are supposed to be turned on, turn that number of faces on.
+            turnOnFacesForNextRound(numFaces);
+        } else {
+            // If 9 faces (or more) are supposed to be turned on, turn on a random number of faces between 1 (inclusive) and 9 (inclusive).
+            int nFaces = random.nextInt(9) + 1;
+            turnOnFacesForNextRound(nFaces);
+        }
     }
 
     /**
