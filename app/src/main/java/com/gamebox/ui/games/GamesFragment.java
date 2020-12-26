@@ -19,6 +19,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class GamesFragment extends Fragment implements OnItemClickListener {
 
+    /**
+     * Array of reference id's of the names of all the games to show in the list.
+     */
     private static final int[] GAME_NAMES = new int[]{
             R.string.tic_tac_toe_game,
             R.string.simon_game,
@@ -28,7 +31,7 @@ public class GamesFragment extends Fragment implements OnItemClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_games, container, false);
 
-        // Recycler View
+        // Create Recycler View
         RecyclerView recyclerView = root.findViewById(R.id.games_recycler_view);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
@@ -44,6 +47,11 @@ public class GamesFragment extends Fragment implements OnItemClickListener {
         return root;
     }
 
+    /**
+     * Called when one of the items in the recycler view is clicked. This starts a new activity depending on which item was clicked.
+     *
+     * @param gameName The reference id of the name of the game.
+     */
     @Override
     public void onItemClicked(int gameName) {
         Class<?> c = null;
@@ -51,6 +59,7 @@ public class GamesFragment extends Fragment implements OnItemClickListener {
             c = TicTacToeActivity.class;
         } else if (R.string.simon_game == gameName) { // Simon
             c = SimonActivity.class;
+            // Not working properly, so it shows a "under development" toast, but doesn't start the activity.
             Toast.makeText(this.getContext(), "This game is currently under development...", Toast.LENGTH_LONG).show();
             return;
         } else if (R.string.face_clicker_game == gameName) { // Face Clicker

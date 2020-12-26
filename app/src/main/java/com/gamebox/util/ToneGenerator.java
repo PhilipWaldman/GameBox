@@ -11,10 +11,25 @@ public class ToneGenerator {
     // and modified by Steve Pomeroy <steve@staticfree.info>
     // and modified again by Philip Waldman
 
+    /**
+     * The sample rate of the tone.
+     */
     private final int sampleRate = 8000;
+    /**
+     * How many samples the tone needs.
+     */
     private final int numSamples;
+    /**
+     * The samples.
+     */
     private final double[] sample;
+    /**
+     * The frequency of the tone.
+     */
     private final double frequency;
+    /**
+     * The generated sound.
+     */
     private final byte[] generatedSound;
     private final Handler handler = new Handler();
 
@@ -29,6 +44,9 @@ public class ToneGenerator {
         generatedSound = new byte[2 * numSamples];
     }
 
+    /**
+     * Play the tone.
+     */
     public void play() {
         // Use a new tread as this can take a while
         final Thread thread = new Thread(() -> {
@@ -38,6 +56,9 @@ public class ToneGenerator {
         thread.start();
     }
 
+    /**
+     * Generate the tone.
+     */
     private void genTone() {
         // fill out the array
         for (int i = 0; i < numSamples; ++i) {
@@ -57,6 +78,9 @@ public class ToneGenerator {
         }
     }
 
+    /**
+     * Play the sound.
+     */
     private void playSound() {
         final AudioTrack audioTrack = new AudioTrack(new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_GAME)

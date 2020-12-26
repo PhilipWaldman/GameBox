@@ -42,17 +42,49 @@ public class FallDetectAlgoActivity extends AppCompatActivity implements SensorE
      * Five seconds in ms.
      */
     private static final int FIVE_SECONDS = 5000;
-    private final float[] preFallAcc = new float[3], postFallAcc = new float[3];
+    /**
+     * The acceleration vector the moment the fall started.
+     */
+    private final float[] preFallAcc = new float[3];
+    /**
+     * The acceleration vector the moment of impact.
+     */
+    private final float[] postFallAcc = new float[3];
+    /**
+     * The time in ms the fall started.
+     */
     private long freeFallStartTime;
+    /**
+     * The time in ms of impact.
+     */
     private long impactTime;
+    /**
+     * The time in ms measured when in {@code State.AFTERMATH}. Used to calculate how long the user has been laying on the ground.
+     */
     private long layingOnGroundTime;
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private Vibrator vibrator;
+    /**
+     * The background of this activity.
+     */
     private ConstraintLayout bg;
     private TextView xAccView, yAccView, zAccView, totalAccView, minAccView, maxAccView, fallStateView, angleView;
-    private float maxAcc = Float.MIN_VALUE, minAcc = Float.MAX_VALUE;
+    /**
+     * The highest acceleration measured.
+     */
+    private float maxAcc = Float.MIN_VALUE;
+    /**
+     * The lowest acceleration measured.
+     */
+    private float minAcc = Float.MAX_VALUE;
+    /**
+     * The change is angle as is being measure in {@code hasOrientationChanged}.
+     */
     private double angle = 0;
+    /**
+     * The state the fall is currently in.
+     */
     private State state;
 
     @Override
@@ -60,13 +92,17 @@ public class FallDetectAlgoActivity extends AppCompatActivity implements SensorE
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fall_detect_algo);
 
+        // Initialize accelerometer
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
+        // Initialize vibrator
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
+        // Initialize state to idle
         state = State.IDLE;
 
+        // Find the views that are used.
         bg = findViewById(R.id.fall_detect_bg);
         xAccView = findViewById(R.id.xAcc);
         yAccView = findViewById(R.id.yAcc);
@@ -83,8 +119,11 @@ public class FallDetectAlgoActivity extends AppCompatActivity implements SensorE
      * if the angle is > 45 degrees the orientation has changed.
      */
     private boolean hasOrientationChanged(float xAcc0, float yAcc0, float zAcc0, float xAcc1, float yAcc1, float zAcc1) {
+        // The dot product of acc0 and acc1
         float acc0DotAcc1 = xAcc0 * xAcc1 + yAcc0 * yAcc1 + zAcc0 * zAcc1;
+        // The length of acc0
         double acc0Length = Math.sqrt(xAcc0 * xAcc0 + yAcc0 * yAcc0 + zAcc0 * zAcc0);
+        // The length of acc1
         double acc1Length = Math.sqrt(xAcc1 * xAcc1 + yAcc1 * yAcc1 + zAcc1 * zAcc1);
         angle = Math.toDegrees(Math.acos(acc0DotAcc1 / (acc0Length * acc1Length)));
         return angle > ANGLE_THRESHOLD;
@@ -94,9 +133,11 @@ public class FallDetectAlgoActivity extends AppCompatActivity implements SensorE
     @Override
     public void onSensorChanged(SensorEvent event) {
         // ------------------------- Algorithm start -------------------------
+        // Get the acceleration values from the accelerometer
         float xAcc = event.values[0];
         float yAcc = event.values[1];
         float zAcc = event.values[2];
+        // Calculate the total acceleration
         float totalAcc = (float) Math.sqrt(xAcc * xAcc + yAcc * yAcc + zAcc * zAcc);
 
         long curTime = System.currentTimeMillis();
@@ -225,11 +266,17 @@ public class FallDetectAlgoActivity extends AppCompatActivity implements SensorE
         sensorManager.unregisterListener(this);
     }
 
+    /**
+     * Resets some variables to their default values.
+     */
     public void resetValues(View view) {
         maxAcc = Float.MIN_VALUE;
         minAcc = Float.MAX_VALUE;
     }
 
+    /**
+     * Opens a new dialog with a detailed explanation of how the algorithm works.
+     */
     public void aboutFallDetectionDialog(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.how_it_works_title)
@@ -238,5 +285,8 @@ public class FallDetectAlgoActivity extends AppCompatActivity implements SensorE
         about.show();
     }
 
-    enum State {IDLE, FREE_FALL, IMPACT, AFTERMATH}
+    /**
+     * The states of a fall.
+     */
+    private enum State {IDLE, FREE_FALL, IMPACT, AFTERMATH}
 }

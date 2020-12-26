@@ -14,16 +14,39 @@ import java.util.Random;
 
 public class SimonActivity extends AppCompatActivity {
 
+    /**
+     * The duration of a beep.
+     */
     private static final double TONE_DURATION = 0.25;
+    // Constants representing the colors.
     private static final int RED = 0, GREEN = 1, BLUE = 2, YELLOW = 3;
-    private static final ToneGenerator RED_TONE = new ToneGenerator(659.255, TONE_DURATION),
-            GREEN_TONE = new ToneGenerator(783.991, TONE_DURATION),
-            BLUE_TONE = new ToneGenerator(391.995, TONE_DURATION),
-            YELLOW_TONE = new ToneGenerator(523.251, TONE_DURATION);
+    /**
+     * The tone for the red button. 659.255 Hz for {@code TONE_DURATION} seconds.
+     */
+    private static final ToneGenerator RED_TONE = new ToneGenerator(659.255, TONE_DURATION);
+    /**
+     * The tone for the green button. 783.991 Hz for {@code TONE_DURATION} seconds.
+     */
+    private static final ToneGenerator GREEN_TONE = new ToneGenerator(783.991, TONE_DURATION);
+    /**
+     * The tone for the blue button. 391.995 Hz for {@code TONE_DURATION} seconds.
+     */
+    private static final ToneGenerator BLUE_TONE = new ToneGenerator(391.995, TONE_DURATION);
+    /**
+     * The tone for the yellow button. 523.251 Hz for {@code TONE_DURATION} seconds.
+     */
+    private static final ToneGenerator YELLOW_TONE = new ToneGenerator(523.251, TONE_DURATION);
+    /**
+     * The order in which to play the buttons.
+     */
+    private final ArrayList<Integer> order = new ArrayList<>();
+    private final Random random = new Random();
+    // The ImageButtons for the game.
     private ImageButton redButton, greenButton, blueButton, yellowButton;
+    /**
+     * The start button.
+     */
     private Button startButton;
-    private ArrayList<Integer> order;
-    private Random random;
 
     /**
      * @param duration in seconds
@@ -41,10 +64,7 @@ public class SimonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simon);
 
-        random = new Random();
-
-        order = new ArrayList<>();
-
+        // Find the buttons
         redButton = findViewById(R.id.simon_red_button);
         greenButton = findViewById(R.id.simon_green_button);
         blueButton = findViewById(R.id.simon_blue_button);
@@ -66,8 +86,8 @@ public class SimonActivity extends AppCompatActivity {
             blinkBeepButton(YELLOW);
         });
 
+        // Find the start button
         startButton = findViewById(R.id.simon_start_button);
-
         startButton.setOnClickListener(v -> {
 //            for (int i = 0; i < 3; i++) {
 //                playNextRound();
@@ -84,10 +104,15 @@ public class SimonActivity extends AppCompatActivity {
         sleep(1);
         for (int color : order) {
             blinkBeepButton(color);
-            sleep(TONE_DURATION);
+            sleep(TONE_DURATION);//TODO: replace with Time thing as in Face Clicker, maybe.
         }
     }
 
+    /**
+     * Blinks and beeps the specified button.
+     *
+     * @param color The color to blink and beep.
+     */
     private void blinkBeepButton(int color) {
         switch (color) {
             case RED:
@@ -111,6 +136,13 @@ public class SimonActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Turn the button "on" and "off."
+     *
+     * @param button      The {@code ImageButton} to blink.
+     * @param onDrawable  The reference to the drawable when the button is on.
+     * @param offDrawable The reference to the drawable when the button is off.
+     */
     private void blink(ImageButton button, int onDrawable, int offDrawable) {
         final Thread thread = new Thread(() -> {
             button.setImageResource(onDrawable);

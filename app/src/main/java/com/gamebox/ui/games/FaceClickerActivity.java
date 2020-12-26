@@ -36,15 +36,42 @@ public class FaceClickerActivity extends AppCompatActivity {
     private static final ToneGenerator LEVEL_UP = new ToneGenerator(444, 0.2);
 
     private final Random random = new Random();
-    private final ImageButton[][] faceButtons = new ImageButton[3][3]; // 2D array of the ImageButtons for the faces that can be pressed.
-    MutableLiveData<Boolean>[][] faceStates; // 2D array of LiveData for the states of the faces that can be pressed. false = off, true = on.
-    MutableLiveData<Integer> startButtonText; // LiveData that contains the reference id to the string that should be shown in the start/stop button.
-    MutableLiveData<String> scoreViewText; // LiveData that contains the string to display the score.
-    private boolean gameStarted = false; // Whether the game has started.
-    private int round; // The current round.
-    private int score; // The current score.
-    private int numFaces; // The number of faces to turned on this round.
-    private Timer gameLoop; // The timer for the game loop.
+    /**
+     * 2D array of the ImageButtons for the faces that can be pressed.
+     */
+    private final ImageButton[][] faceButtons = new ImageButton[3][3];
+    /**
+     * 2D array of LiveData for the states of the faces that can be pressed. false = off, true = on.
+     */
+    MutableLiveData<Boolean>[][] faceStates;
+    /**
+     * LiveData that contains the reference id to the string that should be shown in the start/stop button.
+     */
+    MutableLiveData<Integer> startButtonText;
+    /**
+     * LiveData that contains the string to display the score.
+     */
+    MutableLiveData<String> scoreViewText;
+    /**
+     * Whether the game has started.
+     */
+    private boolean gameStarted = false;
+    /**
+     * The current round.
+     */
+    private int round;
+    /**
+     * The current score.
+     */
+    private int score;
+    /**
+     * The number of faces to turned on this round.
+     */
+    private int numFaces;
+    /**
+     * The timer for the game loop.
+     */
+    private Timer gameLoop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
