@@ -22,7 +22,6 @@ import com.gamebox.util.ToneGenerator;
 
 public class MorseCodeActivity extends AppCompatActivity {
 
-    private static final int NO_FLASH = 1, WRONG_VERSION = 2;
     private static final String DOT = "·";
     private static final boolean ON = true, OFF = false;
     private ImageButton morseButton;
@@ -40,7 +39,7 @@ public class MorseCodeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_morse_code_light);
 
         if (!getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
-            showError(NO_FLASH);
+            showError(ErrorTypes.NO_FLASH);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
@@ -120,7 +119,7 @@ public class MorseCodeActivity extends AppCompatActivity {
 //                speedView.setVisibility(View.VISIBLE);
             });
         } else {
-            showError(WRONG_VERSION);
+            showError(ErrorTypes.WRONG_VERSION);
         }
     }
 
@@ -172,17 +171,22 @@ public class MorseCodeActivity extends AppCompatActivity {
         switchFlashLight(OFF);
     }
 
-    private void showError(int errorType) {
+    private void showError(ErrorTypes errorType) {
         AlertDialog alert = new AlertDialog.Builder(this).create();
         alert.setTitle("Oops!");
-        if (errorType == NO_FLASH) {
-            alert.setMessage("Flashlight not available on your device.");
-        } else if (errorType == WRONG_VERSION) {
-            alert.setMessage("You need at least android 8.0 Oreo.");
+        switch (errorType) {
+            case NO_FLASH:
+                alert.setMessage("Flashlight not available on your device.");
+                break;
+            case WRONG_VERSION:
+                alert.setMessage("You need at least android 8.0 Oreo.");
+                break;
         }
         alert.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (dialog, which) -> finish());
         alert.show();
     }
+
+    private enum ErrorTypes {NO_FLASH, WRONG_VERSION}
 
     public enum MorseCode {
         A("A", "·—"),
