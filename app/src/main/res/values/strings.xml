@@ -20,6 +20,7 @@
     <string name="simon_game">Simon</string>
     <string name="face_clicker_game">Face Clicker</string>
     <string name="morse_code_tool">Morse Code</string>
+    <string name="encryption_tool">Encryption</string>
 
     <!-- Preferences -->
     <string name="dark_mode">Dark mode</string>

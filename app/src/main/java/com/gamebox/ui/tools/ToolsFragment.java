@@ -21,7 +21,8 @@ public class ToolsFragment extends Fragment implements OnItemClickListener {
      * Array of reference id's of the names of all the tools to show in the list.
      */
     private static final int[] TOOL_NAMES = new int[]{
-            R.string.morse_code_tool
+            R.string.morse_code_tool,
+            R.string.encryption_tool
     };
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +52,10 @@ public class ToolsFragment extends Fragment implements OnItemClickListener {
             // Not working properly, so it shows a "under development" toast, but doesn't start the activity.
             Toast.makeText(this.getContext(), "This tool is currently under development...", Toast.LENGTH_LONG).show();
             return;
+        } else if (R.string.encryption_tool == toolName) { // Encryption
+            c = EncryptionActivity.class;
+            // Not working properly, so it shows a "under development" toast, but doesn't start the activity.
+            Toast.makeText(this.getContext(), "This tool is currently under development...", Toast.LENGTH_LONG).show();
         }
         Intent intent = new Intent(this.getContext(), c);
         startActivity(intent);
