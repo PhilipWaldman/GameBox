@@ -2,19 +2,22 @@
 GameBox is a collection of games, tools, and demos for on your phone. The games are classic games that everyone knows how to play. Several games can be played with two people. The tools can be used to do things. The demos I included are just some things that I thought are neat to show off.
 
 ## Features
+These are the main features of GameBox.
 
 ### Games
 * Tic-tac-toe
-* Simon
-
-### Highscores
-
+* ~~Simon (doesn't work)~~
+* Face Clicker
 
 ### Tools
-* Morse code
+* ~~Morse code (doesn't work)~~
 
-###  Demos
+###Demos
 * Fall detection algorithm
+* ~~Pi estimators (doesn't work)~~
 
-### Settings
+### ~~Highscores~~
+* ~~Not implemented yet~~
 
+### ~~Settings~~
+* ~~Not implemented yet~~
