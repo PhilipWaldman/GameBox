@@ -60,7 +60,9 @@ public class ToolsFragment extends Fragment implements OnItemClickListener {
             // Not working properly, so it shows a "under development" toast, but doesn't start the activity.
             Toast.makeText(this.getContext(), "This tool is currently under development...", Toast.LENGTH_LONG).show();
         }
-        Intent intent = new Intent(this.getContext(), c);
-        startActivity(intent);
+        if (c != null) {
+            Intent intent = new Intent(this.getContext(), c);
+            startActivity(intent);
+        }
     }
 }

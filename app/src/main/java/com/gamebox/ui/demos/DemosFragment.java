@@ -58,7 +58,9 @@ public class DemosFragment extends Fragment implements OnItemClickListener {
             Toast.makeText(this.getContext(), "This demo is currently under development...", Toast.LENGTH_LONG).show();
             return;
         }
-        Intent intent = new Intent(this.getContext(), c);
-        startActivity(intent);
+        if (c != null) {
+            Intent intent = new Intent(this.getContext(), c);
+            startActivity(intent);
+        }
     }
 }

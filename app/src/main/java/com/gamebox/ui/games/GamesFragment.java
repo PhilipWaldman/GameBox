@@ -68,7 +68,9 @@ public class GamesFragment extends Fragment implements OnItemClickListener {
         } else if (R.string.face_clicker_game == gameName) { // Face Clicker
             c = FaceClickerActivity.class;
         }
-        Intent intent = new Intent(this.getContext(), c);
-        startActivity(intent);
+        if (c != null) {
+            Intent intent = new Intent(this.getContext(), c);
+            startActivity(intent);
+        }
     }
 }
