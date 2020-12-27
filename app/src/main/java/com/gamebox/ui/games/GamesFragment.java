@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gamebox.MainActivity.OnItemClickListener;
 import com.gamebox.R;
+import com.gamebox.util.SimpleRecyclerViewAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class GamesFragment extends Fragment implements OnItemClickListener {
@@ -36,7 +37,9 @@ public class GamesFragment extends Fragment implements OnItemClickListener {
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        GamesAdapter gamesAdapter = new GamesAdapter(this.getContext(), GAME_NAMES, this);
+        SimpleRecyclerViewAdapter gamesAdapter = new SimpleRecyclerViewAdapter(this.getContext(),
+                GAME_NAMES, this,
+                R.layout.recycler_view_item_games, R.id.games_recycler_item_name);
         recyclerView.setAdapter(gamesAdapter);
 
         // Rick roll fab

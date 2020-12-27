@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gamebox.MainActivity.OnItemClickListener;
 import com.gamebox.R;
+import com.gamebox.util.SimpleRecyclerViewAdapter;
 
 public class ToolsFragment extends Fragment implements OnItemClickListener {
 
@@ -33,7 +34,9 @@ public class ToolsFragment extends Fragment implements OnItemClickListener {
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        ToolsAdapter toolsAdapter = new ToolsAdapter(this.getContext(), TOOL_NAMES, this);
+        SimpleRecyclerViewAdapter toolsAdapter = new SimpleRecyclerViewAdapter(this.getContext(),
+                TOOL_NAMES, this,
+                R.layout.recycler_view_item_tools, R.id.tools_recycler_item_name);
         recyclerView.setAdapter(toolsAdapter);
 
         return root;

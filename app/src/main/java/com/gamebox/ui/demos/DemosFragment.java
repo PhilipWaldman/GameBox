@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gamebox.MainActivity.OnItemClickListener;
 import com.gamebox.R;
+import com.gamebox.util.SimpleRecyclerViewAdapter;
 
 public class DemosFragment extends Fragment implements OnItemClickListener {
 
@@ -33,7 +34,9 @@ public class DemosFragment extends Fragment implements OnItemClickListener {
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        DemosAdapter demosAdapter = new DemosAdapter(this.getContext(), DEMO_NAMES, this);
+        SimpleRecyclerViewAdapter demosAdapter = new SimpleRecyclerViewAdapter(this.getContext(),
+                DEMO_NAMES, this,
+                R.layout.recycler_view_item_demos, R.id.demos_recycler_item_name);
         recyclerView.setAdapter(demosAdapter);
 
         return root;
