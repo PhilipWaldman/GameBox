@@ -64,7 +64,6 @@ public class GamesFragment extends Fragment implements OnItemClickListener {
             c = SimonActivity.class;
             // Not working properly, so it shows a "under development" toast, but doesn't start the activity.
             Toast.makeText(this.getContext(), "This game is currently under development...", Toast.LENGTH_LONG).show();
-            return;
         } else if (R.string.face_clicker_game == gameName) { // Face Clicker
             c = FaceClickerActivity.class;
         }

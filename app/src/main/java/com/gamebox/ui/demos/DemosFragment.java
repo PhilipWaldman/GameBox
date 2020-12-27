@@ -22,8 +22,8 @@ public class DemosFragment extends Fragment implements OnItemClickListener {
      * Array of reference id's of the names of all the demos to show in the list.
      */
     private static final int[] DEMO_NAMES = new int[]{
-            R.string.fall_detection_demo,
-            R.string.pi_estimators_demo
+            R.string.fall_detection_demo
+//            R.string.pi_estimators_demo
     };
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
