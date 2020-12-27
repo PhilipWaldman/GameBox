@@ -1,5 +1,8 @@
 package com.gamebox.ui.tools.encryption;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -7,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
@@ -23,8 +27,6 @@ import java.util.HashSet;
 public class SubstitutionCipherActivity extends AppCompatActivity {
 
     private TextView outputTV, keyErrorTV;
-    private Button copyKeyAndOutput; // https://developer.android.com/guide/topics/text/copy-paste
-    private ImageButton copyOutput;
     private EditText keyInput;
     private boolean encrypt = true, isValidKey = true;
     private String key = "", message = "", outputMessage = "";
@@ -60,8 +62,8 @@ public class SubstitutionCipherActivity extends AppCompatActivity {
         keyErrorTV = findViewById(R.id.key_error_message);
         SwitchCompat encryptSwitch = findViewById(R.id.encrypt_switch);
         Button clearAll = findViewById(R.id.clear_all_button);
-        copyOutput = findViewById(R.id.copy_output_button);
-        copyKeyAndOutput = findViewById(R.id.copy_key_output_button);
+        ImageButton copyOutput = findViewById(R.id.copy_output_button);
+        Button copyKeyAndOutput = findViewById(R.id.copy_key_output_button);
         keyInput = findViewById(R.id.key_input);
         EditText messageInput = findViewById(R.id.message_input);
         Button randomKey = findViewById(R.id.random_key);
@@ -118,7 +120,32 @@ public class SubstitutionCipherActivity extends AppCompatActivity {
         // Generate random key button
         randomKey.setOnClickListener(v -> generateRandomKey());
 
+        // https://developer.android.com/guide/topics/text/copy-paste
         // Copy only the output
+        copyOutput.setOnClickListener(v -> {
+            // Gets a handle to the clipboard service.
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            // Creates a new text clip to put on the clipboard.
+            ClipData outputClipData = ClipData.newPlainText("encryption output", outputMessage);
+            // Set the clipboard's primary clip.
+            clipboard.setPrimaryClip(outputClipData);
+            // Show conformation of copying.
+            Toast.makeText(this, "Output copied", Toast.LENGTH_SHORT).show();
+        });
+
+        // Copy the key and output
+        copyKeyAndOutput.setOnClickListener(v -> {
+            // Prepare string to copy.
+            String data = "Key: " + key + "\nCipher text: " + outputMessage;
+            // Gets a handle to the clipboard service.
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            // Creates a new text clip to put on the clipboard.
+            ClipData outputClipData = ClipData.newPlainText("encryption key and output", data);
+            // Set the clipboard's primary clip.
+            clipboard.setPrimaryClip(outputClipData);
+            // Show conformation of copying.
+            Toast.makeText(this, "Key and output copied", Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void updateViews() {
