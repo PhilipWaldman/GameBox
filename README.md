@@ -11,6 +11,8 @@ These are the main features of GameBox.
 
 ### Tools
 * ~~Morse code (doesn't work)~~
+* Encryption
+    * Substitution cipher
 
 ###Demos
 * Fall detection algorithm
