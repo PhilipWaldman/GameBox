@@ -30,14 +30,17 @@ public class SubstitutionCipherActivity extends AppCompatActivity {
     private EditText keyInput;
     private boolean encrypt = true, isValidKey = true;
     private String key = "", message = "", outputMessage = "";
+    /**
+     * A HashMap of which character should be converted into which character.
+     */
     private HashMap<Character, Character> dictionary;
 
     /**
-     * Substitutes every letter in the message by the letter specified in the dictionary.
+     * Substitutes every character in the message by the character specified in the dictionary.
      *
-     * @param message    The message to substitute the letters in.
-     * @param dictionary A HashMap of which letter should be converted into which letter.
-     * @return The message with the letter substituted.
+     * @param message    The message to substitute the character in.
+     * @param dictionary A HashMap of which character should be converted into which character.
+     * @return The message with the characters substituted.
      */
     @NotNull
     public static String substituteLetters(@NotNull String message, HashMap<Character, Character> dictionary) {
