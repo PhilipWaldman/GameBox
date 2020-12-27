@@ -99,6 +99,6 @@
     <string name="decrypt">Decrypt</string>
     <string name="copy_output_only_content_description">Copy output only</string>
     <string name="clear_all">Clear all</string>
-    <string name="copy_key_encryption">Copy key + encryption</string>
+    <string name="copy_key_and_output">Copy key + output</string>
     <string name="generate_random_key">Generate random key</string>
 </resources>

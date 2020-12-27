@@ -13,21 +13,42 @@ import androidx.appcompat.widget.SwitchCompat;
 
 import com.gamebox.R;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Random;
 
 public class SubstitutionCipherActivity extends AppCompatActivity {
 
     private TextView outputTV, keyErrorTV;
-    private Button copyKeyEncryption; // https://developer.android.com/guide/topics/text/copy-paste
-    private ImageButton copyEncryption;
+    private Button copyKeyAndOutput; // https://developer.android.com/guide/topics/text/copy-paste
+    private ImageButton copyOutput;
     private EditText keyInput;
     private boolean encrypt = true, isValidKey = true;
     private String key = "", message = "", outputMessage = "";
-    private HashMap<String, String> dictionary;
+    private HashMap<Character, Character> dictionary;
+
+    /**
+     * Substitutes every letter in the message by the letter specified in the dictionary.
+     *
+     * @param message    The message to substitute the letters in.
+     * @param dictionary A HashMap of which letter should be converted into which letter.
+     * @return The message with the letter substituted.
+     */
+    @NotNull
+    public static String substituteLetters(@NotNull String message, HashMap<Character, Character> dictionary) {
+        StringBuilder encrypted = new StringBuilder();
+        for (int i = 0; i < message.length(); i++) {
+            char letter = message.charAt(i);
+            if (dictionary != null && dictionary.containsKey(letter)) {
+                letter = dictionary.get(letter);
+            }
+            encrypted.append(letter);
+        }
+        return encrypted.toString();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +60,8 @@ public class SubstitutionCipherActivity extends AppCompatActivity {
         keyErrorTV = findViewById(R.id.key_error_message);
         SwitchCompat encryptSwitch = findViewById(R.id.encrypt_switch);
         Button clearAll = findViewById(R.id.clear_all_button);
-        copyEncryption = findViewById(R.id.copy_output);
-        copyKeyEncryption = findViewById(R.id.copy_encryption_button);
+        copyOutput = findViewById(R.id.copy_output_button);
+        copyKeyAndOutput = findViewById(R.id.copy_key_output_button);
         keyInput = findViewById(R.id.key_input);
         EditText messageInput = findViewById(R.id.message_input);
         Button randomKey = findViewById(R.id.random_key);
@@ -96,6 +117,8 @@ public class SubstitutionCipherActivity extends AppCompatActivity {
 
         // Generate random key button
         randomKey.setOnClickListener(v -> generateRandomKey());
+
+        // Copy only the output
     }
 
     private void updateViews() {
@@ -112,15 +135,7 @@ public class SubstitutionCipherActivity extends AppCompatActivity {
      */
     private void encrypt() {
         if (isValidKey) {
-            StringBuilder encrypted = new StringBuilder();
-            for (int i = 0; i < message.length(); i++) {
-                String letter = message.substring(i, i + 1);
-                if (dictionary != null && dictionary.containsKey(letter)) {
-                    letter = dictionary.get(letter);
-                }
-                encrypted.append(letter);
-            }
-            outputMessage = encrypted.toString();
+            outputMessage = substituteLetters(message, dictionary);
         }
     }
 
@@ -128,7 +143,13 @@ public class SubstitutionCipherActivity extends AppCompatActivity {
      * Decrypt the message.
      */
     private void decrypt() {
-
+        if (isValidKey) {
+            HashMap<Character, Character> reverseDict = new HashMap<>();
+            for (char k : dictionary.keySet()) {
+                reverseDict.put(dictionary.get(k), k);
+            }
+            outputMessage = substituteLetters(message, reverseDict);
+        }
     }
 
     /**
@@ -139,11 +160,19 @@ public class SubstitutionCipherActivity extends AppCompatActivity {
         if (isValidKey) {
             dictionary = new HashMap<>();
             for (int i = 0; i < key.length() - 1; i += 2) {
-                String from = key.substring(i, i + 1);
-                String to = key.substring(i + 1, i + 2);
-                // Not case sensitive
-                dictionary.put(from.toLowerCase(), to.toLowerCase());
-                dictionary.put(from.toUpperCase(), to.toUpperCase());
+                char from = key.charAt(i);
+                char to = key.charAt(i + 1);
+                if (Character.isLetter(from) && Character.isLetter(to)) {
+                    dictionary.put(Character.toLowerCase(from), Character.toLowerCase(to));
+                    dictionary.put(Character.toUpperCase(from), Character.toUpperCase(to));
+                } else if (Character.isLetter(from) && !Character.isLetter(to)) {
+                    dictionary.put(Character.toLowerCase(from), to);
+                    dictionary.put(Character.toUpperCase(from), to);
+                } else if (!Character.isLetter(from) && Character.isLetter(to)) {
+                    dictionary.put(from, Character.toLowerCase(to));
+                } else {
+                    dictionary.put(from, to);
+                }
             }
         }
     }
@@ -159,15 +188,15 @@ public class SubstitutionCipherActivity extends AppCompatActivity {
             keyErrorTV.setText(error);
             return false;
         }
-        HashSet<String> keys = new HashSet<>();
-        HashSet<String> vals = new HashSet<>();
+        HashSet<Character> keys = new HashSet<>();
+        HashSet<Character> vals = new HashSet<>();
         for (int i = 0; i < key.length(); i += 2) {
-            if (!keys.add(key.substring(i, i + 1))) {
+            if (!keys.add(key.charAt(i))) {
                 String error = "The even places cannot contain duplicate values";
                 keyErrorTV.setText(error);
                 return false;
             }
-            if (i + 1 < key.length() && !vals.add(key.substring(i + 1, i + 2))) {
+            if (i + 1 < key.length() && !vals.add(key.charAt(i + 1))) {
                 String error = "The odd places cannot contain duplicate values";
                 keyErrorTV.setText(error);
                 return false;
@@ -177,10 +206,13 @@ public class SubstitutionCipherActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Generates and assigns a random key. The key is 2 permutations of the alphabet (a-z) combined,
+     * alternating the letters from which permutation they come from.
+     * This way it is guaranteed to be a valid key.
+     */
     private void generateRandomKey() {
-        Random rand = new Random();
         StringBuilder newKey = new StringBuilder();
-
         char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         ArrayList<Character> keys = new ArrayList<>();
         ArrayList<Character> vals = new ArrayList<>();

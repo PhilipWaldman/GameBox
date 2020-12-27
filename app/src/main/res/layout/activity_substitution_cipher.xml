@@ -95,7 +95,7 @@
         app:layout_constraintTop_toBottomOf="@+id/output_text_view" />
 
     <ImageButton
-        android:id="@+id/copy_output"
+        android:id="@+id/copy_output_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -118,13 +118,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/copy_encryption_button"
+        android:id="@+id/copy_key_output_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:text="@string/copy_key_encryption"
+        android:text="@string/copy_key_and_output"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
