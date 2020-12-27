@@ -65,4 +65,15 @@
     <string name="substitution_cipher_encryption">Substitutiecijfer</string>
     <string name="transposition_cipher_encryption">Transpositiecijfer</string>
     <string name="enigma_encryption">Enigma</string>
+    <string name="key_colon">Sleutel:</string>
+    <string name="message_colon">Bericht:</string>
+    <string name="output_colon">Output:</string>
+    <string name="enter_key">Voer sleutel in</string>
+    <string name="enter_message">Voer bericht in</string>
+    <string name="encrypt">Versleutel</string>
+    <string name="decrypt">Decoderen</string>
+    <string name="copy_output_only_content_description">Alleen output kopiëren</string>
+    <string name="copy_key_encryption">Kopieer sleutel en encryptie</string>
+    <string name="clear_all">Alles wissen</string>
+    <string name="generate_random_key">Genereer een willekeurige sleutel</string>
 </resources>

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gamebox.MainActivity.OnItemClickListener;
 import com.gamebox.R;
+import com.gamebox.ui.tools.encryption.SubstitutionCipherActivity;
 import com.gamebox.util.SimpleRecyclerViewAdapter;
 
 
@@ -56,10 +57,9 @@ public class EncryptionActivity extends AppCompatActivity implements OnItemClick
             Toast.makeText(this, "This encryption is currently under development...", Toast.LENGTH_LONG).show();
             return;
         } else if (R.string.substitution_cipher_encryption == encryptionName) { // Substitution cipher
-            c = null;
+            c = SubstitutionCipherActivity.class;
             // Not working properly, so it shows a "under development" toast, but doesn't start the activity.
             Toast.makeText(this, "This encryption is currently under development...", Toast.LENGTH_LONG).show();
-            return;
         } else if (R.string.transposition_cipher_encryption == encryptionName) { // Transposition cipher
             c = null;
             // Not working properly, so it shows a "under development" toast, but doesn't start the activity.

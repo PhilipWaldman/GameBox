@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GameBox">
-        <activity android:name=".ui.tools.EncryptionActivity"></activity>
+        <activity android:name=".ui.tools.encryption.SubstitutionCipherActivity"></activity>
+        <activity android:name=".ui.tools.EncryptionActivity" />
         <activity android:name=".ui.games.FaceClickerActivity" />
         <activity
             android:name=".ui.demos.PiEstimationActivity"
