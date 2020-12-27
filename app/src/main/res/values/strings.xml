@@ -82,4 +82,10 @@
     <string name="face_2_0_content_description">Face button 2, 0</string>
     <string name="face_2_1_content_description">Face button 2, 1</string>
     <string name="face_2_2_content_description">Face button 2, 2</string>
+
+    <!-- Encryption method names -->
+    <string name="enigma_encryption">Enigma</string>
+    <string name="caesar_cipher_encryption">Caesar Cipher</string>
+    <string name="substitution_cipher_encryption">Substitution Cipher</string>
+    <string name="transposition_cipher_encryption">Transposition Cipher</string>
 </resources>

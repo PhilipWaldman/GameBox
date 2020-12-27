@@ -61,4 +61,8 @@
     <string name="face_2_1_content_description">Klik het Gezicht knop 2, 1</string>
     <string name="face_2_2_content_description">Klik het Gezicht knop 2, 2</string>
     <string name="encryption_tool">Encryptie</string>
+    <string name="caesar_cipher_encryption">Caesarcijfer</string>
+    <string name="substitution_cipher_encryption">Substitutiecijfer</string>
+    <string name="transposition_cipher_encryption">Transpositiecijfer</string>
+    <string name="enigma_encryption">Enigma</string>
 </resources>

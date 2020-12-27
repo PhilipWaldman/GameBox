@@ -57,8 +57,6 @@ public class ToolsFragment extends Fragment implements OnItemClickListener {
             return;
         } else if (R.string.encryption_tool == toolName) { // Encryption
             c = EncryptionActivity.class;
-            // Not working properly, so it shows a "under development" toast, but doesn't start the activity.
-            Toast.makeText(this.getContext(), "This tool is currently under development...", Toast.LENGTH_LONG).show();
         }
         if (c != null) {
             Intent intent = new Intent(this.getContext(), c);
