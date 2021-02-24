@@ -23,3 +23,6 @@ These are the main features of GameBox.
 
 ### ~~Settings~~
 * ~~Not implemented yet~~
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
